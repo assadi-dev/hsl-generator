@@ -5,16 +5,18 @@ export type UserPreferencesProps = {
   theme: "system" | "dark" | "light";
   notification: boolean;
   runOnStart: boolean;
-  httpServerAlway: boolean;
-  RtmpServerAlway: boolean;
+  httpServerAlwayOn: boolean;
+  RtmpServerAlwayOn: boolean;
+  port: number;
 };
 
 const useUserPreferencesBase = createStore<UserPreferencesProps>(() => ({
   theme: "system",
   notification: false,
   runOnStart: false,
-  httpServerAlway: false,
-  RtmpServerAlway: false,
+  httpServerAlwayOn: false,
+  RtmpServerAlwayOn: false,
+  port: 4358,
 }));
 
 const useUserPreferencesStore = createSelectors(useUserPreferencesBase);

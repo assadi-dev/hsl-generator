@@ -19,8 +19,17 @@ export const addFiles = (filesToUpload: FilePathSubmit[]) =>
     ...state,
     files: [...state.files, ...filesToUpload],
   }));
-export const removeFiles = (idFilesToRemove: genericId[]) =>
+
+export const removeFiles = (filesToRemoveIds: genericId[]) =>
   filesToSubmitStore.setState((state) => ({
     ...state,
-    files: state.files.filter((it) => idFilesToRemove.includes(it.id)),
+    files: state.files.filter((it) => filesToRemoveIds.includes(it.id)),
   }));
+
+export const clearAllFiles = () => {
+  filesToSubmitStore.setState((state) => ({
+    ...state,
+    selected: [],
+    files: [],
+  }));
+};

@@ -1,16 +1,15 @@
 import React from "react";
-import { Import } from "lucide-react";
 import FlexContainer from "../box/FlexContainer";
-import { openFileDialog } from "./helper";
 import InnerDropZone from "./InnerDropZone";
 
-const UploadZone = () => {
+type UploadZoneProps = React.HTMLAttributes<HTMLDivElement>;
+const UploadZone = ({ ...props }: UploadZoneProps) => {
   const dropzoneContainerRef = React.useRef<HTMLDivElement | null>(null);
 
   return (
     <FlexContainer
+      {...props}
       ref={dropzoneContainerRef}
-      onClick={openFileDialog}
       justifyContent="center"
       alignItems="center"
       className="text-secondary border-1 p-3 border-dashed rounded drop-shadow-xl bg-primary-gradient border-white/50 h-[30vh] group hover:bg-primary-gradient-hover"
