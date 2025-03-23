@@ -8,6 +8,17 @@
   "permissions": [
     "core:default",
     "opener:default",
-    "fs:default"
+    "fs:default",
+    "dialog:default",
+    "fs:read-all",
+    "fs:write-all",
+    "fs:allow-copy-file",
+    "fs:allow-remove",
+    {
+      "identifier": "fs:scope",
+      "allow": [
+        "**/**"
+      ]
+    }
   ]
 }

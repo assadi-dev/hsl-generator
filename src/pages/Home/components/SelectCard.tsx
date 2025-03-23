@@ -24,7 +24,7 @@ const SelectCard = ({ item }: SelectCardProps) => {
 
   return (
     <Card
-      className="bg-primary-gradient w-[30vw] transition-all duration-300 hover:scale-110 ease-in-out hover:bg-primary-gradient-hover  text-secondary "
+      className="bg-primary-gradient w-[30vw] transition-all duration-300 hover:scale-110 ease-in-out hover:bg-primary-gradient-hover  text-secondary"
       onClick={handleClick}
     >
       <CardHeader>

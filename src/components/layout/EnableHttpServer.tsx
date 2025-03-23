@@ -32,7 +32,7 @@ const EnableHttpServer = () => {
       alignItems="center"
     >
       <div className="flex flex-row gap-3 items-center">
-        <span className="text-sm font-semibold">État du serveur:</span>
+        <span className="text-sm font-semibold">Serveur HTTP:</span>
         <Switch
           checked={serverRunning}
           onCheckedChange={handleChangeServerStatus}

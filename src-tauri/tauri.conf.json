@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "hsl-generatore",
+  "productName": "hsl-generator",
   "version": "0.1.0",
-  "identifier": "com.hsl-generatore.app",
+  "identifier": "com.hsl-generator.app",
   "build": {
     "beforeDevCommand": "yarn dev",
     "devUrl": "http://localhost:1420",
@@ -12,13 +12,16 @@
   "app": {
     "windows": [
       {
-        "title": "hsl-generatore",
-        "width": 800,
-        "height": 600
+        "title": "hsl-generator",
+        "minWidth": 800,
+        "minHeight": 600
       }
     ],
     "security": {
-      "csp": null
+      "csp": null,
+      "capabilities": [
+        "default"
+      ]
     }
   },
   "bundle": {
@@ -31,5 +34,10 @@
       "icons/icon.icns",
       "icons/icon.ico"
     ]
+  },
+  "plugins": {
+    "fs": {
+      "requireLiteralLeadingDot": false
+    }
   }
 }
