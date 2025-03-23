@@ -3,9 +3,9 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
     grid-template-areas:
-    "b a a" 
-    "c a a"
-    "c a a";
+    "a b b" 
+    "c b b"
+    "c b b";
 
     width: 100%;
     height: 100%;
