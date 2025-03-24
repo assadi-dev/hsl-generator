@@ -3,13 +3,13 @@ import React from "react";
 import styles from "./styles.module.css";
 import { queueProcessFile } from "@/types/FileSystem";
 import { formatBytes } from "@/lib/converter";
+import ItemValidFileCardActions from "./ItemValidFileCardActions";
 
 type ItemValidFileCardProps = {
   item: queueProcessFile;
 };
 const ItemValidFileCard = ({ item }: ItemValidFileCardProps) => {
   const videoRef = React.useRef<HTMLVideoElement>(null);
-  console.log(item.path);
 
   return (
     <div
@@ -20,7 +20,6 @@ const ItemValidFileCard = ({ item }: ItemValidFileCardProps) => {
     >
       <video
         ref={videoRef}
-        src={"http://localhost/file-storage/video-2/203855-922675664.mp4"}
         className="absolute top-0 left-0 h-full w-full object-cover group-hover:grayscale transition-all duration-300"
       />
 
@@ -32,6 +31,7 @@ const ItemValidFileCard = ({ item }: ItemValidFileCardProps) => {
           {formatBytes(item.size)}
         </p>
       </div>
+      <ItemValidFileCardActions item={item} />
     </div>
   );
 };

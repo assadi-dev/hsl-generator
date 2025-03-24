@@ -34,3 +34,19 @@ export const openFileDialog = async () => {
     console.error("Erreur lors de la sélection du fichier :", error);
   }
 };
+
+/* const action = (event: KeyboardEvent) => {
+  if (event.shiftKey) {
+    console.log("Maj :>> ", event.shiftKey);
+  }
+}; */
+/* 
+Detection des touche action rapide
+
+  React.useLayoutEffect(() => {
+    document.addEventListener("keydown", action);
+    return () => {
+      document.removeEventListener("keydown", action);
+    };
+  }, []);
+   */

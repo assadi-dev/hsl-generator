@@ -16,3 +16,14 @@ export const formatBytes = (bytes: number) => {
   // return GB if less than a TB
   else return (bytes / gigaBytes).toFixed(decimal) + " Go";
 };
+
+export const formatDuration = (duration: number) => {
+  let formatStr: string = "";
+  const hours = Math.floor(duration / 3600);
+  if (hours > 0) formatStr = `${hours.toString().padStart(2, "0")}:`;
+  const minutes = Math.floor((duration % 3600) / 60);
+  if (minutes > 0) formatStr += ` ${minutes.toString().padStart(2, "0")}:`;
+  const seconds = Math.floor(duration % 60);
+  formatStr += `${seconds.toString().padStart(2, "0")}`;
+  return formatStr;
+};

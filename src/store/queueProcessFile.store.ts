@@ -6,12 +6,14 @@ type queueProcessFilesProps = {
   queue: queueProcessFile[];
   selected: queueProcessFile[];
   complete: queueProcessFile[];
+  current: queueProcessFile | null;
 };
 
 const queueProcessFilesBase = createStore<queueProcessFilesProps>(() => ({
   queue: [],
   selected: [],
   complete: [],
+  current: null,
 }));
 
 export const queueProcessFilesStore = createSelectors(queueProcessFilesBase);
@@ -57,9 +59,12 @@ export const updateFilesProcessCollection = (
 
 export const removeFilesProcess = (filesProcessIds: genericId[]) => {
   queueProcessFilesStore.setState((state) => {
-    const removedQueue = state.queue.filter((it) =>
-      filesProcessIds.includes(it.id)
+    if (state.current && filesProcessIds.includes(state.current.id))
+      state.current = null;
+    const removedQueue = state.queue.filter(
+      (it) => !filesProcessIds.includes(it.id)
     );
+
     return { ...state, queue: removedQueue };
   });
 };
@@ -69,6 +74,7 @@ export const clearAllFilesProcess = () => {
     ...state,
     queue: [],
     complete: [],
+    current: null,
   }));
 };
 
@@ -82,8 +88,10 @@ export const addFileProcessCompleted = (filesProcess: queueProcessFile[]) => {
 
 export const removeCompletedFileProcess = (filesProcessIds: genericId[]) => {
   queueProcessFilesStore.setState((state) => {
-    const removedQueue = state.complete.filter((it) =>
-      filesProcessIds.includes(it.id)
+    if (state.current && filesProcessIds.includes(state.current.id))
+      state.current = null;
+    const removedQueue = state.complete.filter(
+      (it) => !filesProcessIds.includes(it.id)
     );
     return { ...state, complete: removedQueue };
   });
@@ -99,13 +107,25 @@ export const addFileProcessSelected = (filesProcess: queueProcessFile[]) => {
 
 export const removeSelectedFileProcess = (filesProcessIds: genericId[]) => {
   queueProcessFilesStore.setState((state) => {
-    const removedQueue = state.selected.filter((it) =>
-      filesProcessIds.includes(it.id)
+    if (state.current && filesProcessIds.includes(state.current.id))
+      state.current = null;
+    const removedQueue = state.selected.filter(
+      (it) => !filesProcessIds.includes(it.id)
     );
     return { ...state, selected: removedQueue };
   });
 };
 
+export const selectCurrentFileProcess = (
+  fileProcess: queueProcessFile | null
+) => {
+  queueProcessFilesStore.setState((state) => ({
+    ...state,
+    current: fileProcess,
+  }));
+};
+
 export const filesProcessQueue = queueProcessFilesStore.use;
+export const currentFilesProcessQueue = queueProcessFilesStore.use;
 /* export const filesProcessCompleted = queueProcessFilesStore.use.complete();
 export const filesProcessSelected = queueProcessFilesStore.use.selected(); */
