@@ -106,4 +106,6 @@ export const removeSelectedFileProcess = (filesProcessIds: genericId[]) => {
   });
 };
 
-export const filesProcessQueue = queueProcessFilesStore.getState().queue;
+export const filesProcessQueue = queueProcessFilesStore.use;
+/* export const filesProcessCompleted = queueProcessFilesStore.use.complete();
+export const filesProcessSelected = queueProcessFilesStore.use.selected(); */

@@ -10,7 +10,7 @@ export type FilePathSubmit = {
 };
 
 export type queueProcessFile = FilePathSubmit & {
-  dateOfStart: string;
+  dateOfStart?: string;
   dateOfEnd?: string | null;
   progress: number;
   isRunning: boolean;
