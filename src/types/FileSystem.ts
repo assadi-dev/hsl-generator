@@ -17,4 +17,5 @@ export type queueProcessFile = FilePathSubmit & {
   link?: string;
   remain?: string;
   estimate?: string;
+  completed: boolean;
 };

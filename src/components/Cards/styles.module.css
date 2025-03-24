@@ -1,0 +1,39 @@
+.item-card-video{
+    position: relative;
+   
+    &:hover{
+        &:before {
+            background-color: hsla(0, 0%, 0%, 0.5);
+            transform: scale(1);
+            -webkit-transform: scale(1);
+            -moz-transform: scale(1);
+            -ms-transform: scale(1);
+            -o-transform: scale(1);
+}
+     
+    }
+ 
+    &:before 
+    {
+        content: " ";
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        z-index: 10;
+        transform: scale(1);
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transition:all 0.3s ease-in;
+        -webkit-transition:all 0.3s ease-in;
+        -moz-transition:all 0.3s ease-in;
+        -ms-transition:all 0.3s ease-in;
+        -o-transition:all 0.3s ease-in;
+}
+    
+    
+}
+

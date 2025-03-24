@@ -2,14 +2,26 @@ import { genericId, queueProcessFile } from "@/types/FileSystem";
 import { createStore } from "zustand";
 import { createSelectors } from "./helper";
 
-type queueProcessFilesProps = queueProcessFile[];
+type queueProcessFilesProps = {
+  queue: queueProcessFile[];
+  selected: queueProcessFile[];
+  complete: queueProcessFile[];
+};
 
-const queueProcessFilesBase = createStore<queueProcessFilesProps>(() => []);
+const queueProcessFilesBase = createStore<queueProcessFilesProps>(() => ({
+  queue: [],
+  selected: [],
+  complete: [],
+}));
 
 export const queueProcessFilesStore = createSelectors(queueProcessFilesBase);
 
+//CRUD des fichiers à encoder
 export const addFilesProcess = (filesProcess: queueProcessFile[]) => {
-  queueProcessFilesStore.setState((state) => [...state, ...filesProcess]);
+  queueProcessFilesStore.setState((state) => ({
+    ...state,
+    queue: [...state.queue, ...filesProcess],
+  }));
 };
 
 /**
@@ -22,16 +34,21 @@ export const updateFileProcess = (fileProcess: queueProcessFile | null) => {
   if (!fileProcess) return;
 
   queueProcessFilesStore.setState((state) => {
-    const updatedState = state.map((it) => {
+    const updatedQueue = state.queue.map((it) => {
       if (fileProcess.id === it.id) {
         return { ...it, ...fileProcess };
       }
       return it;
     });
-    return updatedState;
+    return { ...state, queue: updatedQueue };
   });
 };
 
+/**
+ * Modification multiple des fichier de traitement
+ * @param filesProcess
+ * @returns
+ */
 export const updateFilesProcessCollection = (
   filesProcess: queueProcessFile[]
 ) => {
@@ -39,11 +56,54 @@ export const updateFilesProcessCollection = (
 };
 
 export const removeFilesProcess = (filesProcessIds: genericId[]) => {
-  queueProcessFilesStore.setState((state) =>
-    state.filter((it) => filesProcessIds.includes(it.id))
-  );
+  queueProcessFilesStore.setState((state) => {
+    const removedQueue = state.queue.filter((it) =>
+      filesProcessIds.includes(it.id)
+    );
+    return { ...state, queue: removedQueue };
+  });
 };
 
 export const clearAllFilesProcess = () => {
-  queueProcessFilesStore.setState((state) => (state = []));
+  queueProcessFilesStore.setState((state) => ({
+    ...state,
+    queue: [],
+    complete: [],
+  }));
 };
+
+//Logique métier traitement complété
+export const addFileProcessCompleted = (filesProcess: queueProcessFile[]) => {
+  queueProcessFilesStore.setState((state) => ({
+    ...state,
+    complete: [...state.complete, ...filesProcess],
+  }));
+};
+
+export const removeCompletedFileProcess = (filesProcessIds: genericId[]) => {
+  queueProcessFilesStore.setState((state) => {
+    const removedQueue = state.complete.filter((it) =>
+      filesProcessIds.includes(it.id)
+    );
+    return { ...state, complete: removedQueue };
+  });
+};
+
+//Logique metier fichiers sélectionné
+export const addFileProcessSelected = (filesProcess: queueProcessFile[]) => {
+  queueProcessFilesStore.setState((state) => ({
+    ...state,
+    selected: [...filesProcess, ...state.selected],
+  }));
+};
+
+export const removeSelectedFileProcess = (filesProcessIds: genericId[]) => {
+  queueProcessFilesStore.setState((state) => {
+    const removedQueue = state.selected.filter((it) =>
+      filesProcessIds.includes(it.id)
+    );
+    return { ...state, selected: removedQueue };
+  });
+};
+
+export const filesProcessQueue = queueProcessFilesStore.getState().queue;

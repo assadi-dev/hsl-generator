@@ -13,8 +13,8 @@
     "windows": [
       {
         "title": "hsl-generator",
-        "minWidth": 800,
-        "minHeight": 600
+        "minWidth": 988,
+        "minHeight": 720
       }
     ],
     "security": {
