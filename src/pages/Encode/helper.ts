@@ -50,3 +50,22 @@ Detection des touche action rapide
     };
   }, []);
    */
+
+export const startEncodeHSL = async (processFile: queueProcessFile) => {
+  try {
+    if (!processFile) return;
+
+    const payload = {
+      id: Number(processFile.id),
+      input: processFile.path,
+      filename: processFile.filename,
+      duration: processFile.duration,
+    };
+    console.log(processFile);
+    await invoke("encode_hsl", { payload });
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    }
+  }
+};

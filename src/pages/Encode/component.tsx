@@ -2,11 +2,16 @@ import ButtonAnimate from "@/components/buttons/ButtonAnimate";
 import { formatBytes, formatDuration } from "@/lib/converter";
 import { queueProcessFile } from "@/types/FileSystem";
 import { Clapperboard } from "lucide-react";
+import { startEncodeHSL } from "./helper";
 
 type FileVideoDetailProps = {
   fileProcess: queueProcessFile;
 };
+
 export const FileVideoDetail = ({ fileProcess }: FileVideoDetailProps) => {
+  const startEncode = () => {
+    startEncodeHSL(fileProcess);
+  };
   return (
     <div className="flex flex-col gap-3 h-full w-full bg-gradient-to-tl from-primary/50 to-slate-100/20 rounded-lg py-5 px-3 ring-1 ring-white/50">
       <p className="text-primary-gradient text-sm font-semibold h-fit  w-full flex justify-center items-center gap-2 truncate">
@@ -24,7 +29,10 @@ export const FileVideoDetail = ({ fileProcess }: FileVideoDetailProps) => {
         </li>
         {fileProcess?.link && <li>Liens du streaming:</li>}
       </ul>
-      <ButtonAnimate className="!shadow-inner shadow-white/20">
+      <ButtonAnimate
+        className="!shadow-inner shadow-white/20"
+        onClick={startEncode}
+      >
         Encoder
       </ButtonAnimate>
     </div>
