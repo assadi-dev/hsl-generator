@@ -22,11 +22,11 @@ async fn encode_hsl(payload: InputFileInfo) -> Result<(), String> {
     let result = services::encode_process::basic::truncate_video(payload.input.clone()).await;
     match result {
         Ok(_) => {
-            // println!("truncate_video exécuté avec succès !");
+            println!("truncate_video exécuté avec succès !");
             Ok(())
         }
         Err(err) => {
-            //  eprintln!("Erreur dans truncate_video: {}", err);
+            eprintln!("Erreur dans truncate_video: {}", err);
             Err(format!("Erreur : {}", err))
         }
     }
